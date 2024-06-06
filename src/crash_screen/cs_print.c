@@ -459,27 +459,27 @@ size_t cs_print_symbol_name(ScreenCoord_u32 x, ScreenCoord_u32 y, u32 maxWidth, 
 /**
  * @brief Prints information about an address location.
  *
- * @param[in] x,y         The starting position on the screen to print to.
- * @param[in] maxWidth    The maximum number of chars to print.
- * @param[in] addr        The address location.
- * @param[in] sureAddress Whether 'addr' is guaranteed to be a memory address.
+ * @param[in] x,y      The starting position on the screen to print to.
+ * @param[in] maxWidth The maximum number of chars to print.
+ * @param[in] addr     The address location.
+ * @param[in] sureAddr Whether 'addr' is guaranteed to be a memory address.
  * @return size_t The total number of chars printed to the screen.
  */
-size_t cs_print_addr_location_info(ScreenCoord_u32 x, ScreenCoord_u32 y, u32 maxWidth, Address addr, _Bool sureAddress) {
-    if (sureAddress && (addr == (Address)NULL)) {
+size_t cs_print_addr_location_info(ScreenCoord_u32 x, ScreenCoord_u32 y, u32 maxWidth, Address addr, _Bool sureAddr) {
+    if (sureAddr && (addr == (Address)NULL)) {
         return cs_print(x, y, STR_COLOR_PREFIX"NULL", COLOR_RGBA32_VSC_DEFINE);
     }
 
     if (IS_DEBUG_MAP_ENABLED() && cs_get_setting_val(CS_OPT_GROUP_GLOBAL, CS_OPT_GLOBAL_SYMBOL_NAMES)) {
         const MapSymbol* symbol = get_map_symbol(addr, SYMBOL_SEARCH_BACKWARD);
         if (symbol != NULL) {
-            size_t charX = cs_print_symbol_name(x, y, (maxWidth - STRLEN(" +0000")), symbol, sureAddress);
+            size_t charX = cs_print_symbol_name(x, y, (maxWidth - STRLEN(" +0000")), symbol, sureAddr);
             charX += cs_print((x + TEXT_WIDTH(charX + 1)), y, (STR_COLOR_PREFIX"+"STR_HEX_HALFWORD), COLOR_RGBA32_CRASH_OFFSET, (addr - symbol->addr));
             return charX;
         }
     }
 
-    if (sureAddress) {
+    if (sureAddr) {
         const char* memStr = get_hardcoded_memory_str(addr);
         if (memStr != NULL) {
             return cs_print_scroll(x, y, maxWidth, STR_COLOR_PREFIX"%s", COLOR_RGBA32_LIGHT_GRAY, memStr);

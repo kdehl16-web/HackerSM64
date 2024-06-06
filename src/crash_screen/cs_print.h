@@ -126,7 +126,7 @@ size_t cs_print_impl(ScreenCoord_u32 x, ScreenCoord_u32 y, size_t charLimit, con
 
 
 size_t cs_print_symbol_name(ScreenCoord_u32 x, ScreenCoord_u32 y, u32 maxWidth, const MapSymbol* symbol, _Bool printUnknown);
-size_t cs_print_addr_location_info(ScreenCoord_u32 x, ScreenCoord_u32 y, u32 maxWidth, Address addr, _Bool sureAddress);
+size_t cs_print_addr_location_info(ScreenCoord_u32 x, ScreenCoord_u32 y, u32 maxWidth, Address addr, _Bool sureAddr);
 
 
 typedef struct FloatErrorPrintFormat {
